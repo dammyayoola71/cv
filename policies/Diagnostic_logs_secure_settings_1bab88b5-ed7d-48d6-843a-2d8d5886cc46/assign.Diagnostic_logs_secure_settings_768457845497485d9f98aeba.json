@@ -1,0 +1,25 @@
+{
+ "sku": {
+  "name": "A0",
+  "tier": "Free"
+ },
+ "properties": {
+  "displayName": "Diagnostic logs secure settings",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/389b7e7c-4be2-4213-81b1-9e3a9afabd19/providers/Microsoft.Authorization/policyDefinitions/1bab88b5-ed7d-48d6-843a-2d8d5886cc46",
+  "scope": "/subscriptions/d5d63aed-74a4-43d9-bf7f-3bb7db7ce225",
+  "notScopes": [],
+  "parameters": {},
+  "metadata": {
+   "assignedBy": "Damilola Ayoola",
+   "parameterScopes": {},
+   "createdBy": "37a67bdc-f4b9-4038-9a29-9949d32a1f98",
+   "createdOn": "2021-02-26T16:17:56.1715592Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "enforcementMode": "Default"
+ },
+ "id": "/subscriptions/d5d63aed-74a4-43d9-bf7f-3bb7db7ce225/providers/Microsoft.Authorization/policyAssignments/768457845497485d9f98aeba",
+ "type": "Microsoft.Authorization/policyAssignments",
+ "name": "768457845497485d9f98aeba"
+}

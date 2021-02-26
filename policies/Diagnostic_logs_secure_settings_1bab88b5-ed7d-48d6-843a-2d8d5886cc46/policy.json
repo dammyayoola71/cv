@@ -1,0 +1,132 @@
+{
+ "properties": {
+  "displayName": "Diagnostic logs secure settings",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "createdBy": "37a67bdc-f4b9-4038-9a29-9949d32a1f98",
+   "createdOn": "2020-11-02T22:42:37.1885049Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effect",
+     "description": "Define the effect of the Policy as Audit or Disabled"
+    },
+    "allowedValues": [
+     "AuditIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "AuditIfNotExists"
+   },
+   "resourceTypes": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Resource Types",
+     "description": "Select the Resource Types that should have Diagnostics sent to Log Analytics"
+    },
+    "allowedValues": [
+     "Microsoft.DataFactory/factories",
+     "Microsoft.DataLakeStore/accounts",
+     "Microsoft.Network/applicationGateways",
+     "Microsoft.KeyVault/vaults",
+     "Microsoft.RecoveryServices/vaults",
+     "Microsoft.Databricks/workspaces",
+     "Microsoft.Compute/virtualMachineScaleSets",
+     "Microsoft.Network/FrontDoorWebApplicationFirewallPolicies",
+     "Microsoft.Web/sites"
+    ],
+    "defaultValue": [
+     "Microsoft.DataFactory/factories",
+     "Microsoft.DataLakeStore/accounts",
+     "Microsoft.Network/applicationGateways",
+     "Microsoft.KeyVault/vaults",
+     "Microsoft.RecoveryServices/vaults",
+     "Microsoft.Databricks/workspaces",
+     "Microsoft.Compute/virtualMachineScaleSets",
+     "Microsoft.Network/FrontDoorWebApplicationFirewallPolicies",
+     "Microsoft.Web/sites"
+    ]
+   },
+   "workspaceId": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Stream to Log Analytics",
+     "description": "Whether to Stream Diagnostic Settings to Log Analytics"
+    },
+    "allowedValues": [
+     true,
+     false
+    ],
+    "defaultValue": [
+     true,
+     false
+    ]
+   },
+   "storageAccountId": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Stream to Storage Account",
+     "description": "Whether to Stream Diagnostic Settings to a Storage Account"
+    },
+    "allowedValues": [
+     true,
+     false
+    ],
+    "defaultValue": [
+     true,
+     false
+    ]
+   },
+   "eventHubAuthorizationRuleId": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Stream to Event Hub",
+     "description": "Whether to Stream Diagnostic Settings to Event Hub"
+    },
+    "allowedValues": [
+     true,
+     false
+    ],
+    "defaultValue": [
+     true,
+     false
+    ]
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "in": "[parameters('resourceTypes')]"
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.Insights/diagnosticSettings",
+     "existenceCondition": {
+      "allof": [
+       {
+        "value": "[empty(field('Microsoft.Insights/diagnosticSettings/workspaceId'))]",
+        "in": "[parameters('workspaceId')]"
+       },
+       {
+        "value": "[empty(field('Microsoft.Insights/diagnosticSettings/storageAccountId'))]",
+        "in": "[parameters('storageAccountId')]"
+       },
+       {
+        "value": "[empty(field('Microsoft.Insights/diagnosticSettings/eventHubAuthorizationRuleId'))]",
+        "in": "[parameters('eventHubAuthorizationRuleId')]"
+       }
+      ]
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/389b7e7c-4be2-4213-81b1-9e3a9afabd19/providers/Microsoft.Authorization/policyDefinitions/1bab88b5-ed7d-48d6-843a-2d8d5886cc46",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "1bab88b5-ed7d-48d6-843a-2d8d5886cc46"
+}
